@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌟 English Speaking Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --p1: #FF6B9D; --p1l: #FFE0ED; --p1d: #C94B7B;
+    --p2: #FF9A3C; --p2l: #FFF0DE; --p2d: #C97420;
+    --p3: #FFD93D; --p3l: #FFFDE0; --p3d: #C9A800;
+    --p4: #6BCB77; --p4l: #DFFCE3; --p4d: #3E9A4A;
+    --p5: #4D96FF; --p5l: #DDEEFF; --p5d: #1A6BCC;
+    --p6: #9B59B6; --p6l: #F0E5F9; --p6d: #6C3483;
+    --bg: #F8F4FF;
+    --card: #FFFFFF;
+    --text: #2D1B4E;
+    --radius: 20px;
+    --shadow: 0 8px 32px rgba(100,50,150,0.13);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    min-height: 100vh;
+    color: var(--text);
+  }
+
+  /* Animated background */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: -1;
+    background: 
+      radial-gradient(circle at 10% 20%, #FFD6E7 0%, transparent 40%),
+      radial-gradient(circle at 90% 10%, #D6EAFF 0%, transparent 40%),
+      radial-gradient(circle at 50% 90%, #D6FFE4 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, #FFF3CC 0%, transparent 35%),
+      #F8F4FF;
+    animation: bgShift 12s ease-in-out infinite alternate;
+  }
+  @keyframes bgShift {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(20deg); }
+  }
+
+  header {
+    text-align: center;
+    padding: 36px 16px 24px;
+  }
+  header .crown { font-size: 3rem; animation: bounce 2s infinite; display: inline-block; }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    background: linear-gradient(135deg, #FF6B9D, #9B59B6, #4D96FF);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin: 8px 0 4px;
+  }
+  header p { color: #7A5FA0; font-size: 1.1rem; font-weight: 600; }
+
+  /* Part tabs */
+  .tabs {
+    display: flex; flex-wrap: wrap; justify-content: center;
+    gap: 10px; padding: 0 16px 24px;
+  }
+  .tab-btn {
+    border: none; cursor: pointer;
+    padding: 10px 18px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem;
+    transition: all 0.3s cubic-bezier(.34,1.56,.64,1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    position: relative; overflow: hidden;
+    white-space: nowrap;
+  }
+  .tab-btn::before {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.25);
+    transform: translateX(-100%); transition: 0.3s;
+  }
+  .tab-btn:hover::before { transform: translateX(0); }
+  .tab-btn:hover { transform: translateY(-3px) scale(1.05); }
+  .tab-btn.active { transform: translateY(-3px) scale(1.07); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+  /* Part sections */
+  .part { display: none; padding: 0 16px 48px; max-width: 860px; margin: 0 auto; }
+  .part.active { display: block; animation: fadeInUp 0.5s cubic-bezier(.22,1,.36,1); }
+  @keyframes fadeInUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+
+  .part-header {
+    text-align: center; padding: 28px 24px 20px;
+    border-radius: var(--radius); margin-bottom: 24px;
+    position: relative; overflow: hidden;
+  }
+  .part-header::before {
+    content: ''; position: absolute; inset: 0; opacity: 0.12;
+    background: repeating-linear-gradient(45deg,#fff 0,#fff 3px,transparent 3px,transparent 12px);
+  }
+  .part-header h2 {
+    font-family: 'Fredoka One', cursive; font-size: 2rem;
+    color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    position: relative; z-index: 1;
+  }
+  .part-header p {
+    color: rgba(255,255,255,0.9); font-size: 0.95rem; font-weight: 600;
+    margin-top: 6px; position: relative; z-index: 1;
+  }
+
+  /* Cards container */
+  .cards-grid {
+    display: flex; flex-direction: column; gap: 20px;
+  }
+
+  /* Flashcard */
+  .flashcard {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .flashcard:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(100,50,150,0.18); }
+
+  /* Image area */
+  .card-image-wrap {
+    position: relative; cursor: pointer;
+    overflow: hidden; height: 200px;
+    background: linear-gradient(135deg, #f0e8ff, #e8f0ff);
+  }
+  .card-image-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+  .card-image-wrap:hover img { transform: scale(1.05); }
+  .img-placeholder {
+    width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 8px; color: #9B7EC8; font-weight: 700;
+  }
+  .img-placeholder .img-emoji { font-size: 3.5rem; }
+  .img-placeholder span { font-size: 0.85rem; opacity: 0.7; }
+  .img-zoom-hint {
+    position: absolute; bottom: 10px; right: 10px;
+    background: rgba(0,0,0,0.55); color: #fff;
+    border-radius: 8px; padding: 4px 10px; font-size: 0.78rem;
+    display: flex; align-items: center; gap: 4px;
+    backdrop-filter: blur(4px);
+  }
+
+  /* Image modal */
+  .img-modal {
+    display: none; position: fixed; inset: 0; z-index: 1000;
+    background: rgba(20,0,40,0.85); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 16px;
+  }
+  .img-modal.open { display: flex; animation: fadeIn 0.25s; }
+  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
+  .img-modal img {
+    max-width: 92vw; max-height: 88vh;
+    border-radius: 18px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s cubic-bezier(.22,1,.36,1);
+  }
+  @keyframes zoomIn { from{transform:scale(0.7)} to{transform:scale(1)} }
+  .img-modal-close {
+    position: fixed; top: 18px; right: 22px;
+    background: rgba(255,255,255,0.2); color: #fff;
+    border: none; border-radius: 50%; width: 44px; height: 44px;
+    font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .img-modal-close:hover { background: rgba(255,255,255,0.35); }
+
+  /* Card body */
+  .card-body { padding: 20px 22px 18px; }
+
+  /* Question row */
+  .question-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    margin-bottom: 10px;
+  }
+  .show-q-btn {
+    border: none; cursor: pointer;
+    padding: 8px 16px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.82rem;
+    transition: all 0.25s; white-space: nowrap; flex-shrink: 0;
+    display: flex; align-items: center; gap: 5px;
+  }
+  .show-q-btn:hover { transform: scale(1.05); }
+
+  .question-text {
+    background: #f8f5ff; border-radius: 12px;
+    padding: 10px 14px; flex: 1;
+    font-weight: 700; font-size: 0.98rem;
+    line-height: 1.5; color: #3D1E6E;
+    border-left: 4px solid #9B59B6;
+  }
+  .question-text.hidden { display: none; }
+
+  /* Audio button */
+  .audio-btn {
+    border: none; cursor: pointer;
+    border-radius: 50%; width: 34px; height: 34px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; transition: all 0.25s; flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .audio-btn:hover { transform: scale(1.15); }
+  .audio-btn.playing { animation: pulse 0.6s infinite alternate; }
+  @keyframes pulse { from{transform:scale(1)} to{transform:scale(1.2)} }
+
+  /* Q&A list */
+  .qa-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .q-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px; border-radius: 12px;
+    background: #f8f5ff;
+  }
+  .q-item-text {
+    flex: 1; font-weight: 700; font-size: 0.93rem; color: #3D1E6E;
+  }
+  .q-item-text.hidden { display: none; }
+
+  /* Answer section */
+  .answer-section { margin-top: 14px; }
+  .toggle-answer-btn {
+    border: none; cursor: pointer;
+    width: 100%; padding: 10px 18px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    transition: all 0.3s; box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    margin-bottom: 12px;
+  }
+  .toggle-answer-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.18); }
+
+  .answers-wrap { display: none; }
+  .answers-wrap.open { display: block; animation: slideDown 0.35s cubic-bezier(.22,1,.36,1); }
+  @keyframes slideDown { from{opacity:0;transform:translateY(-12px)} to{opacity:1;transform:translateY(0)} }
+
+  .answer-item {
+    display: flex; align-items: flex-start; gap: 8px;
+    padding: 10px 14px; border-radius: 12px; margin-bottom: 8px;
+    border-left: 4px solid;
+    position: relative;
+  }
+  .answer-item-content { flex: 1; }
+  .answer-text {
+    font-size: 0.93rem; line-height: 1.6; font-weight: 600;
+    margin-bottom: 4px;
+  }
+  /* colored words */
+  .w-red { color: #C0392B; font-weight: 800; }
+  .w-orange { color: #D35400; font-weight: 800; }
+  .w-green { color: #1E8449; font-weight: 800; }
+  .w-cam { color: #B7770D; font-weight: 800; }
+
+  .viet-toggle-btn {
+    border: none; cursor: pointer;
+    background: none; font-size: 0.78rem; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px;
+    transition: all 0.2s; margin-top: 4px;
+    display: inline-flex; align-items: center; gap: 4px;
+  }
+  .viet-text {
+    display: none; font-size: 0.85rem; font-style: italic;
+    margin-top: 5px; padding: 5px 10px; border-radius: 8px;
+    font-weight: 600;
+  }
+  .viet-text.show { display: block; animation: fadeIn 0.3s; }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 8px; border-radius: 50px; margin: 12px 0 20px;
+    background: rgba(0,0,0,0.08); overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 50px;
+    transition: width 0.6s ease; background: currentColor;
+  }
+
+  /* Stats row */
+  .stats-row {
+    display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+  }
+  .stat-pill {
+    flex: 1; min-width: 100px;
+    padding: 10px 14px; border-radius: 14px;
+    text-align: center; font-weight: 800;
+  }
+  .stat-pill .stat-num { font-size: 1.6rem; font-family: 'Fredoka One', cursive; }
+  .stat-pill .stat-lbl { font-size: 0.75rem; opacity: 0.8; }
+
+  /* Reveal all / hide all */
+  .global-btns {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .global-btn {
+    border: none; cursor: pointer;
+    padding: 9px 18px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.85rem;
+    transition: all 0.25s; display: flex; align-items: center; gap: 6px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  }
+  .global-btn:hover { transform: translateY(-2px); }
+
+  /* Separator */
+  .divider {
+    border: none; border-top: 2px dashed rgba(0,0,0,0.07);
+    margin: 14px 0;
+  }
+
+  /* Part colors */
+  .p1 { background: linear-gradient(135deg, #FF6B9D, #FF4081); }
+  .p2 { background: linear-gradient(135deg, #FF9A3C, #FF6B00); }
+  .p3 { background: linear-gradient(135deg, #FFD93D, #FFA500); }
+  .p4 { background: linear-gradient(135deg, #6BCB77, #2ECC71); }
+  .p5 { background: linear-gradient(135deg, #4D96FF, #2471D0); }
+  .p6 { background: linear-gradient(135deg, #9B59B6, #6C3483); }
+
+  .tab-p1 { background: linear-gradient(135deg,#FF6B9D,#FF4081); color:#fff; }
+  .tab-p2 { background: linear-gradient(135deg,#FF9A3C,#FF6B00); color:#fff; }
+  .tab-p3 { background: linear-gradient(135deg,#FFD93D,#FFA500); color:#fff; }
+  .tab-p4 { background: linear-gradient(135deg,#6BCB77,#2ECC71); color:#fff; }
+  .tab-p5 { background: linear-gradient(135deg,#4D96FF,#2471D0); color:#fff; }
+  .tab-p6 { background: linear-gradient(135deg,#9B59B6,#6C3483); color:#fff; }
+
+  footer {
+    text-align: center; padding: 20px;
+    color: #9B7EC8; font-size: 0.85rem; font-weight: 600;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 7px; }
+  ::-webkit-scrollbar-track { background: #f0e8ff; }
+  ::-webkit-scrollbar-thumb { background: #C9ACF0; border-radius: 10px; }
+
+  @media (max-width: 600px) {
+    .tab-btn { padding: 8px 13px; font-size: 0.8rem; }
+    .card-image-wrap { height: 160px; }
+    .global-btns { gap: 7px; }
+  }
+
+  /* ===== TAB VOCAB ===== */
+  .tab-vocab { background: linear-gradient(135deg,#00C9A7,#007E6B); color:#fff; }
+  #partVocab { display:none; }
+  #partVocab.active { display:block; }
+  #partVocab .part-header { background: linear-gradient(135deg,#00C9A7,#007E6B); }
+
+  .vocab-search-bar {
+    display: flex; gap: 10px; margin-bottom: 16px; align-items: center; flex-wrap: wrap;
+  }
+  .vocab-search-bar input {
+    flex: 1; min-width: 200px; padding: 11px 18px; border-radius: 50px;
+    border: 2px solid #B2EDE5; font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 600;
+    outline: none; background: #fff; color: #1a4a44; transition: border 0.2s;
+  }
+  .vocab-search-bar input:focus { border-color: #00C9A7; }
+  .vocab-filter-btns { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 20px; }
+  .vf-btn {
+    border: none; cursor: pointer; padding: 8px 14px; border-radius: 50px;
+    font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8rem;
+    transition: all 0.2s; background: #E0FAF5; color: #007E6B;
+  }
+  .vf-btn.active, .vf-btn:hover { background: #00C9A7; color: #fff; transform: scale(1.05); }
+
+  .vocab-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 20px;
+  }
+
+  .vocab-card {
+    background: #fff; border-radius: 20px;
+    box-shadow: 0 6px 24px rgba(0,150,120,0.12);
+    overflow: hidden; transition: transform 0.3s, box-shadow 0.3s;
+    border: 2px solid transparent;
+  }
+  .vocab-card:hover { transform: translateY(-5px); box-shadow: 0 14px 36px rgba(0,150,120,0.2); border-color: #B2EDE5; }
+
+  .vocab-img-wrap {
+    height: 150px; overflow: hidden; cursor: pointer; position: relative;
+    background: linear-gradient(135deg,#E0FAF5,#B2EDE5);
+  }
+  .vocab-img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+  .vocab-img-wrap:hover img { transform: scale(1.08); }
+  .vocab-img-placeholder {
+    width:100%; height:100%; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; gap:5px; color:#00C9A7; font-weight:700;
+  }
+  .vocab-img-placeholder .v-emoji { font-size:3.2rem; }
+  .vocab-img-placeholder span { font-size:0.75rem; color:#4ABFB4; }
+
+  .vocab-body { padding: 14px 16px 16px; }
+
+  .vocab-word-row { display:flex; align-items:center; gap:9px; margin-bottom:3px; flex-wrap:wrap; }
+  .vocab-word { font-family:'Fredoka One',cursive; font-size:1.45rem; color:#007E6B; }
+  .vocab-type-badge {
+    font-size:0.7rem; font-weight:800; padding:3px 10px; border-radius:20px;
+    text-transform:uppercase; letter-spacing:0.4px;
+  }
+  .badge-n   { background:#FFF0D5; color:#C97420; }
+  .badge-v   { background:#FFE0ED; color:#C94B7B; }
+  .badge-adj { background:#D6EAFF; color:#1A6BCC; }
+  .badge-adv { background:#DFFCE3; color:#3E9A4A; }
+  .badge-np  { background:#F0E5F9; color:#6C3483; }
+  .badge-phrase { background:#E0FAF5; color:#007E6B; }
+  .badge-exp { background:#FFF3CC; color:#8B7000; }
+
+  .vocab-ipa {
+    font-size:0.85rem; color:#5BA39B; font-weight:600; margin-bottom:2px;
+    font-style:italic; display:flex; align-items:center; gap:8px;
+  }
+  .vocab-audio-btn {
+    border:none; cursor:pointer; border-radius:50%;
+    width:30px; height:30px; display:inline-flex; align-items:center; justify-content:center;
+    font-size:0.8rem; background:#00C9A7; color:#fff;
+    box-shadow:0 2px 8px rgba(0,150,120,0.3); transition:all 0.2s; flex-shrink:0;
+  }
+  .vocab-audio-btn:hover { transform:scale(1.15); }
+  .vocab-audio-btn.playing { animation:pulse 0.6s infinite alternate; }
+
+  .vocab-meaning { font-size:0.93rem; font-weight:700; color:#1A4A44; margin:7px 0 5px; line-height:1.4; }
+  .vocab-meaning .viet { color:#C94B7B; }
+
+  .vocab-forms-table {
+    width:100%; border-collapse:collapse; margin:9px 0;
+    font-size:0.82rem; border-radius:10px; overflow:hidden;
+  }
+  .vocab-forms-table th { background:#00C9A7; color:#fff; padding:5px 10px; font-weight:800; text-align:center; }
+  .vocab-forms-table td { padding:5px 10px; text-align:center; border-bottom:1px solid #E0FAF5; font-weight:700; color:#1A4A44; }
+  .vocab-forms-table tr:last-child td { border-bottom:none; }
+  .vocab-forms-table tr:nth-child(even) td { background:#F0FAF8; }
+
+  .vocab-np-analysis { display:flex; gap:6px; flex-wrap:wrap; margin:7px 0; align-items:center; font-size:0.83rem; }
+  .np-part { padding:3px 10px; border-radius:20px; font-weight:800; }
+  .np-adj  { background:#D6EAFF; color:#1A6BCC; }
+  .np-noun { background:#DFFCE3; color:#3E9A4A; }
+  .np-prep { background:#FFF3CC; color:#8B7000; }
+  .np-arrow { color:#bbb; font-size:0.85rem; }
+
+  .vocab-example-box {
+    background:#F0FAF8; border-radius:12px; padding:10px 13px; margin-top:10px;
+    border-left:4px solid #00C9A7;
+  }
+  .vocab-example-label { font-size:0.7rem; font-weight:800; color:#00A88C; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:5px; }
+  .vocab-example-row { display:flex; align-items:flex-start; gap:8px; margin-bottom:4px; }
+  .vocab-example-text { font-size:0.87rem; font-weight:600; color:#1A4A44; line-height:1.5; flex:1; }
+  .vocab-example-text em { color:#007E6B; font-style:normal; font-weight:800; }
+  .vocab-viet-toggle {
+    border:none; cursor:pointer; background:none;
+    font-size:0.73rem; font-weight:700; color:#00C9A7;
+    border:1.5px solid #00C9A7; border-radius:20px; padding:2px 8px;
+    margin-top:4px; transition:all 0.2s; display:inline-flex; align-items:center; gap:3px;
+  }
+  .vocab-viet-toggle:hover { background:#00C9A7; color:#fff; }
+  .vocab-viet-ex {
+    display:none; font-size:0.82rem; color:#C94B7B; font-weight:600;
+    margin-top:4px; padding:4px 8px; background:#FFE8F2; border-radius:8px;
+  }
+  .vocab-viet-ex.show { display:block; animation:fadeIn 0.3s; }
+
+  .no-results { text-align:center; padding:48px; color:#5BA39B; font-size:1.1rem; font-weight:700; grid-column:1/-1; }
+  .no-results .no-emoji { font-size:3rem; display:block; margin-bottom:10px; }
+</style>
+</head>
+<body>
+
+<!-- Image Modal -->
+<div class="img-modal" id="imgModal" onclick="closeModal()">
+  <button class="img-modal-close" onclick="closeModal()">✕</button>
+  <img id="modalImg" src="" alt="" onclick="event.stopPropagation()">
+</div>
+
+<header>
+  <div class="crown">🌟</div>
+  <h1>English Speaking Practice</h1>
+  <p>✨ Luyện nói tiếng Anh mỗi ngày — Tự tin giao tiếp! ✨</p>
+</header>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn tab-p1 active" onclick="showPart(1,this)">🌈 Phần 1<br><small>Cuối tuần & Thời tiết</small></button>
+  <button class="tab-btn tab-p2" onclick="showPart(2,this)">☀️ Phần 2<br><small>Buổi sáng & Giấc ngủ</small></button>
+  <button class="tab-btn tab-p3" onclick="showPart(3,this)">🍳 Phần 3<br><small>Bữa sáng</small></button>
+  <button class="tab-btn tab-p4" onclick="showPart(4,this)">🏠 Phần 4<br><small>Tuổi thơ & Đời tư</small></button>
+  <button class="tab-btn tab-p5" onclick="showPart(5,this)">⚽ Phần 5<br><small>Thể thao & Thú cưng</small></button>
+  <button class="tab-btn tab-p6" onclick="showPart(6,this)">🌠 Phần 6<br><small>Ước mơ tương lai</small></button>
+  <button class="tab-btn tab-vocab" onclick="showPart('vocab',this)">📚 Từ vựng<br><small>Vocabulary</small></button>
+</div>
+
+<!-- ===================== PART 1 ===================== -->
+<div class="part active" id="part1">
+  <div class="part-header p1">
+    <h2>🌈 Phần 1 — Cuối tuần & Thời tiết</h2>
+    <p>Weekend, Yesterday & Weather</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#FFE0ED;color:#C94B7B" onclick="showAllQ(1)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#FFE0ED;color:#C94B7B" onclick="showAllA(1)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(1)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid1">
+
+    <!-- Card 1-1 -->
+    <div class="flashcard" data-part="1" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part1/1.png','Cuối tuần')">
+        <img src="part1/1.png" alt="Weekend" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🎢🌊🎡</div><span>part1/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/1.wav',this)" title="Nghe câu hỏi">🔊</button>
+            <button class="show-q-btn" style="background:#FFE0ED;color:#C94B7B" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Hey, how was your weekend?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/2.wav',this)" title="Nghe câu hỏi">🔊</button>
+            <button class="show-q-btn" style="background:#FFE0ED;color:#C94B7B" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">What did you do yesterday? How was yesterday?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/3.wav',this)" title="Nghe câu hỏi">🔊</button>
+            <button class="show-q-btn" style="background:#FFE0ED;color:#C94B7B" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Did you go anywhere yesterday or on the weekend?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#FF6B9D,#FF4081);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#FFF5F8;border-color:#FF6B9D">
+              <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/4.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">Yeah, my weekend <span class="w-red">was</span> <span class="w-cam">good</span>. I actually... I <span class="w-red">went</span> to the water park with my parents, my brother and my sister. We <span class="w-red">had</span> a <span class="w-cam">wonderful</span> <span class="w-green">time</span>.</div>
+                <button class="viet-toggle-btn" style="color:#FF6B9D;border:2px solid #FF6B9D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFE0ED;color:#C94B7B">Cuối tuần của tôi <b>thật tuyệt</b>. Tôi đã <b>đi</b> đến công viên nước cùng bố mẹ, anh và chị. Chúng tôi đã có một <b>khoảng thời gian tuyệt vời</b>.</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#FFF5F8;border-color:#FF6B9D">
+              <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/5.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">When I <span class="w-red">went</span> to the water park, <span class="w-green">the temperature</span> <span class="w-red">was</span> around 28 degrees. It <span class="w-red">was</span> <span class="w-cam">perfect for</span> <span class="w-green">swimming</span>. But in the middle of the day, it went up to 32, which was too much for me.</div>
+                <button class="viet-toggle-btn" style="color:#FF6B9D;border:2px solid #FF6B9D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFE0ED;color:#C94B7B">Khi tôi <b>đến</b> công viên nước, <b>nhiệt độ</b> khoảng 28 độ. Thời tiết <b>hoàn hảo để</b> <b>bơi lội</b>. Nhưng giữa trưa, nó tăng lên 32 độ, quá nóng với tôi rồi.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 1-2: Weather -->
+    <div class="flashcard" data-part="1" data-idx="2">
+      <div class="card-image-wrap" onclick="openModal('part1/2.png','Thời tiết')">
+        <img src="part1/2.png" alt="Weather" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🌡️☀️🌊</div><span>part1/2.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/6.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFE0ED;color:#C94B7B" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">How was the weather yesterday or on the weekend?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/7.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFE0ED;color:#C94B7B" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Was that hot or was it cool, warm?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#FF6B9D,#FF4081);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#FFF5F8;border-color:#FF6B9D">
+              <button class="audio-btn" style="background:#FF6B9D;color:#fff" onclick="playAudio('part1/8.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text"><span class="w-green">The temperature</span> <span class="w-red">was</span> around 28°C — <span class="w-cam">perfect for</span> <span class="w-green">swimming</span>! But it <span class="w-red">went</span> up to 32°C in the afternoon. My poor skin <span class="w-red">couldn't handle</span> <span class="w-green">32 degrees Celsius</span>!</div>
+                <button class="viet-toggle-btn" style="color:#FF6B9D;border:2px solid #FF6B9D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFE0ED;color:#C94B7B"><b>Nhiệt độ</b> khoảng 28°C — <b>hoàn hảo để bơi</b>! Nhưng buổi chiều lên đến 32°C. Da tôi tội nghiệp <b>chịu không nổi</b> 32 độ rồi!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PART 2 ===================== -->
+<div class="part" id="part2">
+  <div class="part-header p2">
+    <h2>☀️ Phần 2 — Buổi sáng & Giấc ngủ</h2>
+    <p>Morning Routine & Sleep</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#FFF0DE;color:#C97420" onclick="showAllQ(2)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#FFF0DE;color:#C97420" onclick="showAllA(2)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(2)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid2">
+
+    <div class="flashcard" data-part="2" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part2/1.png','Morning')">
+        <img src="part2/1.png" alt="Morning" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🌅☕🛏️</div><span>part2/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF9A3C;color:#fff" onclick="playAudio('part2/1.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFF0DE;color:#C97420" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">How was your morning today? Was it busy?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FF9A3C;color:#fff" onclick="playAudio('part2/2.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFF0DE;color:#C97420" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Was it nothing special? Was it normal?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#FF9A3C,#FF6B00);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#FFF5EA;border-color:#FF9A3C">
+              <button class="audio-btn" style="background:#FF9A3C;color:#fff" onclick="playAudio('part2/3.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">Me, <span class="w-green">my morning</span> <span class="w-red">was</span> <span class="w-cam">typical</span> today. I <span class="w-red">woke up</span>, you know. After that, I <span class="w-cam">quickly</span> <span class="w-red">put on</span> my clothes. I <span class="w-red">got dressed</span>, and I <span class="w-red">had breakfast</span> with my family. And then I <span class="w-red">headed to</span> school.</div>
+                <button class="viet-toggle-btn" style="color:#FF9A3C;border:2px solid #FF9A3C" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFF0DE;color:#C97420"><b>Buổi sáng của tôi</b> hôm nay <b>bình thường</b>. Tôi <b>thức dậy</b>, rồi <b>mặc quần áo nhanh</b>. Tôi <b>ăn sáng</b> với gia đình, sau đó <b>đến trường</b>.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PART 3 ===================== -->
+<div class="part" id="part3">
+  <div class="part-header p3">
+    <h2>🍳 Phần 3 — Bữa sáng</h2>
+    <p>Breakfast & Food</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#FFFDE0;color:#C9A800" onclick="showAllQ(3)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#FFFDE0;color:#C9A800" onclick="showAllA(3)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(3)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid3">
+
+    <div class="flashcard" data-part="3" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part3/1.png','Breakfast')">
+        <img src="part3/1.png" alt="Breakfast" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🍳🥓🍚</div><span>part3/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/1.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFFDE0;color:#C9A800" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">What did you have for breakfast today?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/2.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFFDE0;color:#C9A800" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Do you normally not eat breakfast or do you normally eat that for breakfast?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/3.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#FFFDE0;color:#C9A800" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Do you usually skip breakfast, or is this your typical meal?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#FFD93D,#FFA500);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#FFFBEA;border-color:#FFD93D">
+              <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/4.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">My mom <span class="w-red">made</span> <span class="w-green">breakfast</span> for me. I had <span class="w-green">fried rice</span>. It was a nice treat because my mom added some extra <span class="w-green">sausages</span> and <span class="w-green">eggs</span> today.</div>
+                <button class="viet-toggle-btn" style="color:#C9A800;border:2px solid #FFD93D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFFDE0;color:#C9A800">Mẹ tôi <b>nấu</b> <b>bữa sáng</b> cho tôi. Tôi ăn <b>cơm chiên</b>. Thật ngon vì mẹ bỏ thêm <b>xúc xích</b> và <b>trứng</b> hôm nay.</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#FFFBEA;border-color:#FFD93D">
+              <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/5.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">I had <span class="w-green">caramelized pork</span> with <span class="w-green">steamed rice</span>. It's one of my favorite comfort <span class="w-green">foods</span>! It's not something I have often, but it was a <span class="w-cam">nice</span> <span class="w-green">treat</span>!</div>
+                <button class="viet-toggle-btn" style="color:#C9A800;border:2px solid #FFD93D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFFDE0;color:#C9A800">Tôi ăn <b>thịt kho</b> với <b>cơm trắng</b>. Đây là một trong những món yêu thích của tôi! Không phải ngày nào cũng có, nhưng hôm nay thật là một <b>bữa ăn đặc biệt</b>!</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#FFFBEA;border-color:#FFD93D">
+              <button class="audio-btn" style="background:#FFD93D;color:#7a5700" onclick="playAudio('part3/6.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">My mom <span class="w-red">made</span> <span class="w-green">breakfast</span> for me. I had <span class="w-green">bacon and eggs</span>. It's not something I have often. But yes, today I had bacon and eggs.</div>
+                <button class="viet-toggle-btn" style="color:#C9A800;border:2px solid #FFD93D" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#FFFDE0;color:#C9A800">Mẹ tôi nấu sáng cho tôi. Hôm nay tôi ăn <b>thịt xông khói và trứng</b>. Đây không phải món tôi ăn thường xuyên, nhưng hôm nay có!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PART 4 ===================== -->
+<div class="part" id="part4">
+  <div class="part-header p4">
+    <h2>🏠 Phần 4 — Tuổi thơ & Đời tư</h2>
+    <p>Childhood & Personal Life</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#DFFCE3;color:#3E9A4A" onclick="showAllQ(4)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#DFFCE3;color:#3E9A4A" onclick="showAllA(4)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(4)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid4">
+
+    <div class="flashcard" data-part="4" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part4/1.png','Childhood')">
+        <img src="part4/1.png" alt="Childhood" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>👶🌍🏡</div><span>part4/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#6BCB77;color:#fff" onclick="playAudio('part4/1.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DFFCE3;color:#3E9A4A" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Where were you born?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#6BCB77;color:#fff" onclick="playAudio('part4/2.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DFFCE3;color:#3E9A4A" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Did you grow up there, too? Did you grow up where you were born?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#6BCB77,#2ECC71);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#F0FFF2;border-color:#6BCB77">
+              <button class="audio-btn" style="background:#6BCB77;color:#fff" onclick="playAudio('part4/3.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">I <span class="w-red">was born</span> in Vietnam, but I <span class="w-red">grew up</span> half in Vietnam and half in the US because I <span class="w-red">moved</span> there when I <span class="w-red">was</span> seven.</div>
+                <button class="viet-toggle-btn" style="color:#3E9A4A;border:2px solid #6BCB77" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DFFCE3;color:#3E9A4A">Tôi <b>sinh ra</b> ở Việt Nam, nhưng tôi <b>lớn lên</b> nửa ở Việt Nam, nửa ở Mỹ vì tôi <b>chuyển đến</b> đó khi tôi <b>lên 7 tuổi</b>.</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#F0FFF2;border-color:#6BCB77">
+              <button class="audio-btn" style="background:#6BCB77;color:#fff" onclick="playAudio('part4/4.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">I <span class="w-red">was born</span> in Poland. (Ví dụ: I was born in <em>[your city]</em>.)</div>
+                <button class="viet-toggle-btn" style="color:#3E9A4A;border:2px solid #6BCB77" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DFFCE3;color:#3E9A4A">Tôi <b>sinh ra</b> ở Ba Lan. (Thay tên thành phố của bạn vào!)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PART 5 ===================== -->
+<div class="part" id="part5">
+  <div class="part-header p5">
+    <h2>⚽ Phần 5 — Thể thao, Thú cưng & Xe đạp</h2>
+    <p>Sports, Pets & Bikes</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="showAllQ(5)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="showAllA(5)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(5)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid5">
+
+    <!-- Card 5-1: Sports -->
+    <div class="flashcard" data-part="5" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part5/1.png','Sports')">
+        <img src="part5/1.png" alt="Sports" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>⚽🏃🌳</div><span>part5/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/1.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Did you play any sports as a kid? Did you play any sports? Were you good?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#4D96FF,#2471D0);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#F0F6FF;border-color:#4D96FF">
+              <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/2.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">Actually, I <span class="w-red">played</span> football (soccer) a lot. It's the most <span class="w-cam">popular</span> sport where I <span class="w-red">grew up</span>. I <span class="w-red">spent</span> almost every evening playing football in the yard with my cousin.</div>
+                <button class="viet-toggle-btn" style="color:#1A6BCC;border:2px solid #4D96FF" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DDEEFF;color:#1A6BCC">Tôi <b>chơi</b> bóng đá rất nhiều. Đây là môn thể thao <b>phổ biến nhất</b> ở nơi tôi <b>lớn lên</b>. Tôi <b>dành</b> hầu hết các buổi tối để đá bóng ngoài sân với anh họ.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5-2: Pets -->
+    <div class="flashcard" data-part="5" data-idx="2">
+      <div class="card-image-wrap" onclick="openModal('part5/2.png','Pets')">
+        <img src="part5/2.png" alt="Pets" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🐈🐶🎨</div><span>part5/2.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/3.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">Did you have any pets, like any animals in the house?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/4.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">What was the name of your pet? What were the names of your pets?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#4D96FF,#2471D0);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#F0F6FF;border-color:#4D96FF">
+              <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/5.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">We <span class="w-red">had</span> two cats, Ngao and Miu. We <span class="w-red">named</span> him Ngao because it <span class="w-red">means</span> 'silly', but we really <span class="w-red">loved</span> him; he <span class="w-red">was</span> so <span class="w-cam">cute</span>! As for Miu, it just <span class="w-red">means</span> 'Cat' in Vietnamese. She <span class="w-red">was</span> a <span class="w-cam">calico</span> <span class="w-green">cat</span> (she had three colors on her fur).</div>
+                <button class="viet-toggle-btn" style="color:#1A6BCC;border:2px solid #4D96FF" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DDEEFF;color:#1A6BCC">Chúng tôi <b>có</b> hai con mèo, Ngao và Miu. Đặt tên Ngao vì có nghĩa là 'ngốc', nhưng chúng tôi rất <b>yêu quý</b> nó. Còn Miu là <b>mèo tam thể</b> (có ba màu lông).</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#F0F6FF;border-color:#4D96FF">
+              <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/6.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">We also <span class="w-red">had</span> a dog named Nau. It means 'Brown' in English, which <span class="w-red">was</span> <span class="w-cam">perfect</span> since that <span class="w-red">was</span> <span class="w-green">the color of his coat</span>. My dog, Nau, is very active; he loves running around!</div>
+                <button class="viet-toggle-btn" style="color:#1A6BCC;border:2px solid #4D96FF" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DDEEFF;color:#1A6BCC">Chúng tôi còn <b>có</b> một con chó tên Nâu. Tên <b>hoàn hảo</b> vì đó chính là <b>màu lông của nó</b>. Chó Nâu rất năng động, suốt ngày chạy nhảy!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5-3: Bike -->
+    <div class="flashcard" data-part="5" data-idx="3">
+      <div class="card-image-wrap" onclick="openModal('part5/3.png','Bike')">
+        <img src="part5/3.png" alt="Bike" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>🚲👶🌟</div><span>part5/3.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/7.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#DDEEFF;color:#1A6BCC" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">How old were you when you learned how to ride a bike?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#4D96FF,#2471D0);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#F0F6FF;border-color:#4D96FF">
+              <button class="audio-btn" style="background:#4D96FF;color:#fff" onclick="playAudio('part5/8.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">Like me, I learned to ride a bike around 6 years old, 7 maximum, I think. It's like almost a universal human experience today!</div>
+                <button class="viet-toggle-btn" style="color:#1A6BCC;border:2px solid #4D96FF" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#DDEEFF;color:#1A6BCC">Tôi học đi xe đạp khoảng <b>6 tuổi</b>, nhiều nhất là 7 tuổi. Đây gần như là trải nghiệm <b>chung của mọi người</b>!</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PART 6 ===================== -->
+<div class="part" id="part6">
+  <div class="part-header p6">
+    <h2>🌠 Phần 6 — Ước mơ tương lai</h2>
+    <p>Future Dreams & Childhood Wishes</p>
+  </div>
+  <div class="global-btns">
+    <button class="global-btn" style="background:#F0E5F9;color:#6C3483" onclick="showAllQ(6)">📋 Hiện tất cả câu hỏi</button>
+    <button class="global-btn" style="background:#F0E5F9;color:#6C3483" onclick="showAllA(6)">💡 Mở tất cả câu trả lời</button>
+    <button class="global-btn" style="background:#f0f0f0;color:#555" onclick="hideAll(6)">🙈 Ẩn tất cả</button>
+  </div>
+  <div class="cards-grid" id="grid6">
+
+    <div class="flashcard" data-part="6" data-idx="1">
+      <div class="card-image-wrap" onclick="openModal('part6/1.png','Dream')">
+        <img src="part6/1.png" alt="Dream" onerror="this.parentNode.innerHTML='<div class=\'img-placeholder\'><div class=\'img-emoji\'>⚽🌟🏆</div><span>part6/1.png</span></div><div class=\'img-zoom-hint\'>🔍 Xem to</div>'">
+        <div class="img-zoom-hint">🔍 Xem to</div>
+      </div>
+      <div class="card-body">
+        <div class="qa-list">
+          <div class="q-item">
+            <button class="audio-btn" style="background:#9B59B6;color:#fff" onclick="playAudio('part6/1.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#F0E5F9;color:#6C3483" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">When you were a kid and you were dreaming about your future life, what did you want to be when you grew up?</div>
+          </div>
+          <div class="q-item">
+            <button class="audio-btn" style="background:#9B59B6;color:#fff" onclick="playAudio('part6/2.wav',this)">🔊</button>
+            <button class="show-q-btn" style="background:#F0E5F9;color:#6C3483" onclick="toggleQ(this)">👁 Câu hỏi</button>
+            <div class="q-item-text hidden">What did you want to be when you became an adult?</div>
+          </div>
+        </div>
+        <hr class="divider">
+        <div class="answer-section">
+          <button class="toggle-answer-btn" style="background:linear-gradient(135deg,#9B59B6,#6C3483);color:#fff" onclick="toggleAnswers(this)">
+            💬 Xem câu trả lời <span>▼</span>
+          </button>
+          <div class="answers-wrap">
+            <div class="answer-item" style="background:#F9F2FF;border-color:#9B59B6">
+              <button class="audio-btn" style="background:#9B59B6;color:#fff" onclick="playAudio('part6/3.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">I <span class="w-red">played</span> a lot of street soccer. I also <span class="w-red">played</span> a lot of soccer. The first thing I remember <span class="w-red">wanting</span> to be was a soccer player.</div>
+                <button class="viet-toggle-btn" style="color:#6C3483;border:2px solid #9B59B6" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#F0E5F9;color:#6C3483">Tôi <b>chơi</b> bóng đá đường phố rất nhiều. Điều đầu tiên tôi nhớ <b>muốn trở thành</b> là một <b>cầu thủ bóng đá</b>.</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#F9F2FF;border-color:#9B59B6">
+              <button class="audio-btn" style="background:#9B59B6;color:#fff" onclick="playAudio('part6/4.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">I <span class="w-red">wanted</span> to be a soccer player because I <span class="w-red">loved</span> the game. I <span class="w-red">was</span> <span class="w-cam">pretty good</span>. I <span class="w-red">played</span> as a striker.</div>
+                <button class="viet-toggle-btn" style="color:#6C3483;border:2px solid #9B59B6" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#F0E5F9;color:#6C3483">Tôi <b>muốn trở thành</b> cầu thủ vì tôi <b>yêu</b> bóng đá. Tôi <b>chơi khá tốt</b>. Tôi <b>đá</b> vị trí tiền đạo.</div>
+              </div>
+            </div>
+            <div class="answer-item" style="background:#F9F2FF;border-color:#9B59B6">
+              <button class="audio-btn" style="background:#9B59B6;color:#fff" onclick="playAudio('part6/5.wav',this)">🔊</button>
+              <div class="answer-item-content">
+                <div class="answer-text">Then, when I <span class="w-red">started</span> high school at the age of 14, I <span class="w-red">tried out</span> for the school soccer team, and I <span class="w-red">realized</span> all the other kids <span class="w-red">were</span> much better than me. And the dream… the dream <span class="w-red">faded</span>. I just <span class="w-red">stopped</span> there. 😢</div>
+                <button class="viet-toggle-btn" style="color:#6C3483;border:2px solid #9B59B6" onclick="toggleViet(this)">🇻🇳 Tiếng Việt</button>
+                <div class="viet-text" style="background:#F0E5F9;color:#6C3483">Rồi khi tôi <b>bắt đầu</b> cấp 3 lúc 14 tuổi, tôi <b>thử</b> vào đội bóng trường, và nhận ra các bạn khác <b>giỏi hơn</b> tôi nhiều. Và ước mơ… ước mơ <b>tắt dần</b>. Tôi dừng lại ở đó. 😢</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== VOCAB ===================== -->
+<div class="part" id="partVocab">
+  <div class="part-header" style="background:linear-gradient(135deg,#00C9A7,#007E6B)">
+    <h2>📚 Từ vựng — Vocabulary</h2>
+    <p>Học từ mới qua hình ảnh, âm thanh & ví dụ sinh động!</p>
+  </div>
+
+  <div class="vocab-search-bar">
+    <input type="text" id="vocabSearch" placeholder="🔍 Tìm từ vựng..." oninput="filterVocab()">
+  </div>
+  <div class="vocab-filter-btns">
+    <button class="vf-btn active" onclick="filterType('all',this)">🌟 Tất cả</button>
+    <button class="vf-btn" onclick="filterType('n',this)">📦 Danh từ</button>
+    <button class="vf-btn" onclick="filterType('v',this)">⚡ Động từ</button>
+    <button class="vf-btn" onclick="filterType('adj',this)">🎨 Tính từ</button>
+    <button class="vf-btn" onclick="filterType('adv',this)">🚀 Trạng từ</button>
+    <button class="vf-btn" onclick="filterType('np',this)">🔗 Cụm từ</button>
+  </div>
+
+  <div class="vocab-grid" id="vocabGrid">
+    <!-- Cards generated by JS -->
+  </div>
+</div>
+
+<footer>
+  <p>🌟 Made with ❤️ for English Learners &nbsp;|&nbsp; 🎧 Click 🔊 để nghe audio &nbsp;|&nbsp; 🖼️ Click ảnh để phóng to</p>
+  <p style="margin-top:6px;opacity:0.6;">past1/1.wav • part1/2.wav • part2/1.wav ... tự thêm file audio & ảnh vào thư mục tương ứng</p>
+</footer>
+
+<script>
+// ---- Vocab Tab ----
+function showPart(n, btn) {
+  document.querySelectorAll('.part').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const id = n === 'vocab' ? 'partVocab' : 'part' + n;
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (n === 'vocab') renderVocab();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ============ VOCABULARY DATA ============
+const VOCAB = [
+  {
+    word: "wonderful",
+    ipa: "/ˈwʌndərfəl/",
+    type: "adj",
+    viet: "tuyệt vời, kỳ diệu",
+    emoji: "🌟",
+    img: "vocab/wonderful.png",
+    audio: "vocab/27.wav",
+    example: "We had a <em>wonderful</em> time at the water park.",
+    exViet: "Chúng tôi đã có một khoảng thời gian tuyệt vời ở công viên nước.",
+    exAudio: "vocab/28.wav"
+  },
+  {
+    word: "temperature",
+    ipa: "/ˈtempərətʃər/",
+    type: "n",
+    viet: "nhiệt độ",
+    emoji: "🌡️",
+    img: "vocab/temperature.png",
+    audio: "vocab/1.wav",
+    example: "The <em>temperature</em> was around 28 degrees Celsius.",
+    exViet: "Nhiệt độ khoảng 28 độ Celsius.",
+    exAudio: "vocab/2.wav"
+  },
+  {
+    word: "around",
+    ipa: "/əˈraʊnd/",
+    type: "adv",
+    viet: "khoảng, xung quanh",
+    emoji: "🔄",
+    img: "vocab/around.png",
+    audio: "vocab/33.wav",
+    example: "I learned to ride a bike <em>around</em> 6 years old.",
+    exViet: "Tôi học đi xe đạp khoảng 6 tuổi.",
+    exAudio: "vocab/34.wav"
+  },
+  {
+    word: "handle",
+    ipa: "/ˈhændəl/",
+    type: "v",
+    viet: "chịu đựng, xử lý, đối phó",
+    emoji: "💪",
+    img: "vocab/handle.png",
+    audio: "vocab/9.wav",
+    forms: { v1: "handle", v2: "handled", v3: "handled" },
+    example: "My poor skin couldn't <em>handle</em> 32 degrees Celsius.",
+    exViet: "Da tôi tội nghiệp không thể chịu đựng 32 độ Celsius.",
+    exAudio: "vocab/10.wav"
+  },
+  {
+    word: "degrees",
+    ipa: "/dɪˈɡriːz/",
+    type: "n",
+    viet: "độ (nhiệt độ, góc độ)",
+    emoji: "🔢",
+    img: "vocab/degrees.png",
+    audio: "vocab/3.wav",
+    example: "It was 32 <em>degrees</em>, which was too hot for me.",
+    exViet: "Trời 32 độ, nóng quá với tôi rồi.",
+    exAudio: "vocab/4.wav"
+  },
+  {
+    word: "Celsius",
+    ipa: "/ˈsɛlsiəs/",
+    type: "n",
+    viet: "độ C (đơn vị đo nhiệt độ)",
+    emoji: "🌡️",
+    img: "vocab/celsius.png",
+    audio: "vocab/5.wav",
+    example: "Water boils at 100 degrees <em>Celsius</em>.",
+    exViet: "Nước sôi ở 100 độ Celsius.",
+    exAudio: "vocab/6.wav"
+  },
+  {
+    word: "typical",
+    ipa: "/ˈtɪpɪkəl/",
+    type: "adj",
+    viet: "bình thường, điển hình, thông thường",
+    emoji: "📅",
+    img: "vocab/typical.png",
+    audio: "vocab/29.wav",
+    example: "My morning was <em>typical</em> today — nothing special.",
+    exViet: "Buổi sáng của tôi hôm nay bình thường — không có gì đặc biệt.",
+    exAudio: "vocab/30.wav"
+  },
+  {
+    word: "quickly",
+    ipa: "/ˈkwɪkli/",
+    type: "adv",
+    viet: "nhanh chóng, mau lẹ",
+    emoji: "⚡",
+    img: "vocab/quickly.png",
+    audio: "vocab/35.wav",
+    example: "I <em>quickly</em> put on my clothes and had breakfast.",
+    exViet: "Tôi nhanh chóng mặc quần áo rồi ăn sáng.",
+    exAudio: "vocab/36.wav"
+  },
+  {
+    word: "headed to",
+    ipa: "/ˈhɛdɪd tuː/",
+    type: "v",
+    viet: "đi đến, hướng đến (nơi nào đó)",
+    emoji: "🚶",
+    img: "vocab/headed.png",
+    audio: "vocab/11.wav",
+    forms: { v1: "head to", v2: "headed to", v3: "headed to" },
+    example: "I <em>headed to</em> school after breakfast.",
+    exViet: "Tôi đi đến trường sau khi ăn sáng.",
+    exAudio: "vocab/12.wav"
+  },
+  {
+    word: "fried rice",
+    ipa: "/fraɪd raɪs/",
+    type: "np",
+    viet: "cơm chiên",
+    emoji: "🍳",
+    img: "vocab/friedrice.png",
+    audio: "vocab/friedrice.wav",
+    np: [
+      { part: "fried", role: "adj", label: "Tính từ (chiên)" },
+      { part: "rice", role: "noun", label: "Danh từ (cơm)" }
+    ],
+    example: "My mom made <em>fried rice</em> for breakfast this morning.",
+    exViet: "Mẹ tôi làm cơm chiên cho bữa sáng sáng nay.",
+    exAudio: "vocab/ex_friedrice.wav"
+  },
+  {
+    word: "a nice treat",
+    ipa: "/ə naɪs triːt/",
+    type: "np",
+    viet: "một bữa thưởng thức đặc biệt, một điều thú vị bất ngờ",
+    emoji: "🎁",
+    img: "vocab/treat.png",
+    audio: "vocab/treat.wav",
+    np: [
+      { part: "nice", role: "adj", label: "Tính từ (ngon/tuyệt)" },
+      { part: "treat", role: "noun", label: "Danh từ (điều thú vị)" }
+    ],
+    example: "It was <em>a nice treat</em> because mom added extra sausages.",
+    exViet: "Thật là một bữa đặc biệt vì mẹ thêm xúc xích.",
+    exAudio: "vocab/ex_treat.wav"
+  },
+  {
+    word: "added",
+    ipa: "/ˈædɪd/",
+    type: "v",
+    viet: "thêm vào, bổ sung",
+    emoji: "➕",
+    img: "vocab/added.png",
+    audio: "vocab/13.wav",
+    forms: { v1: "add", v2: "added", v3: "added" },
+    example: "Mom <em>added</em> some extra sausages and eggs today.",
+    exViet: "Mẹ thêm một ít xúc xích và trứng hôm nay.",
+    exAudio: "vocab/14.wav"
+  },
+  {
+  word: "faded",
+  ipa: "/ˈfeɪdɪd/",
+  type: "v",
+  viet: "phai màu, mờ dần, nhạt dần",
+  emoji: "🌫️",
+  img: "vocab/faded.png",
+  audio: "vocab/15.wav",
+  forms: { v1: "fade", v2: "faded", v3: "faded" },
+  example: "The colors on my old shirt have <em>faded</em>.",
+  exViet: "Màu trên chiếc áo cũ của tôi đã phai.",
+  exAudio: "vocab/16.wav"
+},
+  {
+    word: "sausages",
+    ipa: "/ˈsɒsɪdʒɪz/",
+    type: "n",
+    viet: "xúc xích",
+    emoji: "🌭",
+    img: "vocab/sausages.png",
+    audio: "vocab/7.wav",
+    example: "I love having <em>sausages</em> and eggs for breakfast.",
+    exViet: "Tôi thích ăn xúc xích và trứng cho bữa sáng.",
+    exAudio: "vocab/8.wav"
+  },
+  {
+    word: "caramelized pork",
+    ipa: "/ˈkærəməlaɪzd pɔːrk/",
+    type: "np",
+    viet: "thịt kho (thịt heo kho tàu)",
+    emoji: "🍖",
+    img: "vocab/caramelizedpork.png",
+    audio: "vocab/caramelizedpork.wav",
+    np: [
+      { part: "caramelized", role: "adj", label: "Tính từ (kho/thắng đường)" },
+      { part: "pork", role: "noun", label: "Danh từ (thịt heo)" }
+    ],
+    example: "I had <em>caramelized pork</em> with steamed rice for lunch.",
+    exViet: "Tôi ăn thịt kho với cơm trắng cho bữa trưa.",
+    exAudio: "vocab/ex_caramelizedpork.wav"
+  },
+  {
+    word: "steamed rice",
+    ipa: "/stiːmd raɪs/",
+    type: "np",
+    viet: "cơm trắng (cơm hấp)",
+    emoji: "🍚",
+    img: "vocab/steamedrice.png",
+    audio: "vocab/steamedrice.wav",
+    np: [
+      { part: "steamed", role: "adj", label: "Tính từ (hấp/nấu)" },
+      { part: "rice", role: "noun", label: "Danh từ (cơm)" }
+    ],
+    example: "Nothing beats <em>steamed rice</em> with mom's cooking!",
+    exViet: "Không gì ngon bằng cơm trắng với món mẹ nấu!",
+    exAudio: "vocab/ex_steamedrice.wav"
+  },
+  {
+    word: "comfort foods",
+    ipa: "/ˈkʌmfərt fuːdz/",
+    type: "np",
+    viet: "món ăn thân quen yêu thích (mang lại cảm giác ấm áp)",
+    emoji: "🤗",
+    img: "vocab/comfortfood.png",
+    audio: "vocab/comfortfoods.wav",
+    np: [
+      { part: "comfort", role: "adj", label: "Tính từ/Danh từ bổ nghĩa (thân quen)" },
+      { part: "foods", role: "noun", label: "Danh từ (món ăn)" }
+    ],
+    example: "Pho and banh mi are my favorite <em>comfort foods</em>.",
+    exViet: "Phở và bánh mì là những món ăn thân quen yêu thích của tôi.",
+    exAudio: "vocab/ex_comfortfoods.wav"
+  },
+  {
+    word: "was born",
+    ipa: "/wɒz bɔːrn/",
+    type: "v",
+    viet: "được sinh ra, chào đời",
+    emoji: "👶",
+    img: "vocab/bornborn.png",
+    audio: "vocab/17.wav",
+    forms: { v1: "be born", v2: "was/were born", v3: "been born" },
+    example: "I <em>was born</em> in Vietnam in 2005.",
+    exViet: "Tôi được sinh ra ở Việt Nam năm 2005.",
+    exAudio: "vocab/18.wav"
+  },
+  {
+    word: "grew up",
+    ipa: "/ɡruː ʌp/",
+    type: "v",
+    viet: "lớn lên, trưởng thành",
+    emoji: "🌱",
+    img: "vocab/grewup.png",
+    audio: "vocab/19.wav",
+    forms: { v1: "grow up", v2: "grew up", v3: "grown up" },
+    example: "I <em>grew up</em> in a small town near the river.",
+    exViet: "Tôi lớn lên ở một thị trấn nhỏ gần con sông.",
+    exAudio: "vocab/20.wav"
+  },
+  {
+    word: "half in",
+    ipa: "/hɑːf ɪn/",
+    type: "np",
+    viet: "một nửa ở (nơi nào đó)",
+    emoji: "✌️",
+    img: "vocab/halfin.png",
+    audio: "vocab/halfin.wav",
+    np: [
+      { part: "half", role: "adj", label: "Từ chỉ lượng (một nửa)" },
+      { part: "in", role: "prep", label: "Giới từ (ở)" }
+    ],
+    example: "I grew up <em>half in</em> Vietnam and <em>half in</em> the US.",
+    exViet: "Tôi lớn lên nửa ở Việt Nam và nửa ở Mỹ.",
+    exAudio: "vocab/ex_halfin.wav"
+  },
+  {
+    word: "moved",
+    ipa: "/muːvd/",
+    type: "v",
+    viet: "chuyển đến, dọn nhà",
+    emoji: "📦",
+    img: "vocab/moved.png",
+    audio: "vocab/21.wav",
+    forms: { v1: "move", v2: "moved", v3: "moved" },
+    example: "My family <em>moved</em> to the US when I was seven.",
+    exViet: "Gia đình tôi chuyển đến Mỹ khi tôi lên bảy.",
+    exAudio: "vocab/22.wav"
+  },
+  {
+    word: "the most popular",
+    ipa: "/ðə moʊst ˈpɒpjʊlər/",
+    type: "np",
+    viet: "phổ biến nhất, nổi tiếng nhất",
+    emoji: "🏆",
+    img: "vocab/popular.png",
+    audio: "vocab/mostpopular.wav",
+    np: [
+      { part: "the most", role: "adj", label: "Bổ nghĩa cấp cao nhất" },
+      { part: "popular", role: "adj", label: "Tính từ (phổ biến)" }
+    ],
+    example: "Football is <em>the most popular</em> sport in Vietnam.",
+    exViet: "Bóng đá là môn thể thao phổ biến nhất ở Việt Nam.",
+    exAudio: "vocab/ex_mostpopular.wav"
+  },
+  {
+    word: "spent",
+    ipa: "/spɛnt/",
+    type: "v",
+    viet: "dành (thời gian), tiêu (tiền)",
+    emoji: "⏳",
+    img: "vocab/spent.png",
+    audio: "vocab/23.wav",
+    forms: { v1: "spend", v2: "spent", v3: "spent" },
+    example: "I <em>spent</em> every evening playing football with my cousin.",
+    exViet: "Tôi dành mỗi buổi tối để đá bóng với anh họ.",
+    exAudio: "vocab/24.wav"
+  },
+  {
+    word: "almost every evening",
+    ipa: "/ˈɔːlmoʊst ˈɛvri ˈiːvnɪŋ/",
+    type: "np",
+    viet: "hầu hết mỗi buổi tối, gần như mỗi tối",
+    emoji: "🌆",
+    img: "vocab/evening.png",
+    audio: "vocab/almosteveryevening.wav",
+    np: [
+      { part: "almost", role: "adj", label: "Trạng từ (hầu như)" },
+      { part: "every", role: "adj", label: "Tính từ (mỗi)" },
+      { part: "evening", role: "noun", label: "Danh từ (buổi tối)" }
+    ],
+    example: "I played football <em>almost every evening</em> as a kid.",
+    exViet: "Hồi nhỏ tôi đá bóng hầu hết mỗi buổi tối.",
+    exAudio: "vocab/ex_almosteveryevening.wav"
+  },
+  {
+    word: "named",
+    ipa: "/neɪmd/",
+    type: "v",
+    viet: "đặt tên, gọi tên",
+    emoji: "🏷️",
+    img: "vocab/named.png",
+    audio: "vocab/25.wav",
+    forms: { v1: "name", v2: "named", v3: "named" },
+    example: "We <em>named</em> our cat Miu, which means 'cat' in Vietnamese.",
+    exViet: "Chúng tôi đặt tên mèo là Miu, có nghĩa là 'mèo' trong tiếng Việt.",
+    exAudio: "vocab/26.wav"
+  },
+  {
+    word: "calico",
+    ipa: "/ˈkælɪkoʊ/",
+    type: "adj",
+    viet: "tam thể (mèo có ba màu lông: trắng, đen, cam)",
+    emoji: "🐈",
+    img: "vocab/calico.png",
+    audio: "vocab/31.wav",
+    example: "My cat Miu was a beautiful <em>calico</em> cat with three colors.",
+    exViet: "Con mèo Miu của tôi là một chú mèo tam thể đẹp với ba màu lông.",
+    exAudio: "vocab/32.wav"
+  },
+  {
+    word: "a universal human experience",
+    ipa: "/ə ˌjuːnɪˈvɜːrsəl ˈhjuːmən ɪkˈspɪəriəns/",
+    type: "np",
+    viet: "một trải nghiệm chung của nhân loại (ai cũng trải qua)",
+    emoji: "🌍",
+    img: "vocab/universal.png",
+    audio: "vocab/universalexperience.wav",
+    np: [
+      { part: "a", role: "adj", label: "Mạo từ" },
+      { part: "universal", role: "adj", label: "Tính từ (phổ quát)" },
+      { part: "human", role: "adj", label: "Tính từ (con người)" },
+      { part: "experience", role: "noun", label: "Danh từ (trải nghiệm)" }
+    ],
+    example: "Learning to ride a bike is <em>a universal human experience</em>.",
+    exViet: "Học đi xe đạp là một trải nghiệm chung của nhân loại.",
+    exAudio: "vocab/ex_universalexperience.wav"
+  }
+];
+
+let currentTypeFilter = 'all';
+
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  const search = document.getElementById('vocabSearch').value.toLowerCase().trim();
+  const filtered = VOCAB.filter(v => {
+    const matchType = currentTypeFilter === 'all' || v.type === currentTypeFilter ||
+      (currentTypeFilter === 'np' && (v.type === 'np' || v.type === 'phrase'));
+    const matchSearch = !search ||
+      v.word.toLowerCase().includes(search) ||
+      v.viet.toLowerCase().includes(search);
+    return matchType && matchSearch;
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="no-results"><span class="no-emoji">🔍</span>Không tìm thấy từ vựng phù hợp!</div>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((v, i) => {
+    const typeLabelMap = { n:'Danh từ', v:'Động từ', adj:'Tính từ', adv:'Trạng từ', np:'Cụm danh từ', phrase:'Cụm từ', exp:'Diễn đạt' };
+    const badgeClass = 'badge-' + v.type;
+    const uid = 'v_' + i + '_' + v.word.replace(/\s+/g,'_');
+
+    // Verb forms table
+    let formsHTML = '';
+    if (v.forms) {
+      formsHTML = `<table class="vocab-forms-table">
+        <tr><th>V1 (Hiện tại)</th><th>V2 (Quá khứ)</th><th>V3 (P.P)</th></tr>
+        <tr><td>${v.forms.v1}</td><td>${v.forms.v2}</td><td>${v.forms.v3}</td></tr>
+      </table>`;
+    }
+
+    // Noun phrase analysis
+    let npHTML = '';
+    if (v.np) {
+      npHTML = `<div class="vocab-np-analysis">
+        <span style="font-weight:800;color:#5BA39B;font-size:0.78rem">Phân tích:</span>
+        ${v.np.map((p, pi) => `
+          ${pi > 0 ? '<span class="np-arrow">+</span>' : ''}
+          <span class="np-part np-${p.role}" title="${p.label}">
+            ${p.part} <small style="font-weight:600;opacity:0.8">(${p.label.split('(')[1].replace(')','').trim()})</small>
+          </span>
+        `).join('')}
+      </div>`;
+    }
+
+    return `<div class="vocab-card" data-type="${v.type}" data-word="${v.word.toLowerCase()}">
+      <div class="vocab-img-wrap" onclick="openModal('${v.img}','${v.word}')">
+        <img src="${v.img}" alt="${v.word}"
+          onerror="this.parentNode.innerHTML='<div class=\\'vocab-img-placeholder\\'><div class=\\'v-emoji\\'>${v.emoji}</div><span>${v.img}</span></div>'">
+      </div>
+      <div class="vocab-body">
+        <div class="vocab-word-row">
+          <span class="vocab-word">${v.word}</span>
+          <span class="vocab-type-badge ${badgeClass}">${typeLabelMap[v.type] || v.type}</span>
+        </div>
+        <div class="vocab-ipa">
+          <button class="vocab-audio-btn" onclick="playVocabAudio('${v.audio}',this,'${v.word}')" title="Nghe phát âm">🔊</button>
+          ${v.ipa}
+        </div>
+        <div class="vocab-meaning">🇻🇳 <span class="viet">${v.viet}</span></div>
+        ${formsHTML}
+        ${npHTML}
+        <div class="vocab-example-box">
+          <div class="vocab-example-label">💬 Ví dụ · Example</div>
+          <div class="vocab-example-row">
+            <button class="vocab-audio-btn" onclick="playVocabAudio('${v.exAudio}',this,'${v.example.replace(/<[^>]+>/g,'')}')" title="Nghe câu ví dụ">🔊</button>
+            <div>
+              <div class="vocab-example-text">${v.example}</div>
+              <button class="vocab-viet-toggle" onclick="this.nextElementSibling.classList.toggle('show');this.textContent=this.nextElementSibling.classList.contains('show')?'🙈 Ẩn':'🇻🇳 Dịch'">🇻🇳 Dịch</button>
+              <div class="vocab-viet-ex">${v.exViet}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function filterVocab() { renderVocab(); }
+
+function filterType(type, btn) {
+  currentTypeFilter = type;
+  document.querySelectorAll('.vf-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderVocab();
+}
+
+function playVocabAudio(src, btn, fallbackText) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentBtn) { currentBtn.classList.remove('playing'); currentBtn.textContent = '🔊'; }
+    if (currentBtn === btn) { currentAudio = null; currentBtn = null; return; }
+  }
+  const audio = new Audio(src);
+  audio.addEventListener('ended', () => {
+    btn.classList.remove('playing'); btn.textContent = '🔊';
+    currentAudio = null; currentBtn = null;
+  });
+  audio.addEventListener('error', () => {
+    btn.classList.remove('playing'); btn.textContent = '🔊';
+    if ('speechSynthesis' in window && fallbackText) {
+      const clean = fallbackText.replace(/<[^>]+>/g,'');
+      const utter = new SpeechSynthesisUtterance(clean);
+      utter.lang = 'en-US'; utter.rate = 0.88;
+      btn.classList.add('playing'); btn.textContent = '⏸';
+      window.speechSynthesis.speak(utter);
+      utter.onend = () => { btn.classList.remove('playing'); btn.textContent = '🔊'; };
+    }
+  });
+  currentAudio = audio; currentBtn = btn;
+  btn.classList.add('playing'); btn.textContent = '⏸';
+  audio.play();
+}
+
+
+// ---- Toggle single Q ----
+function toggleQ(btn) {
+  const txt = btn.nextElementSibling;
+  const hidden = txt.classList.contains('hidden');
+  txt.classList.toggle('hidden', !hidden);
+  btn.textContent = hidden ? '🙈 Ẩn câu hỏi' : '👁 Câu hỏi';
+}
+
+// ---- Toggle answers ----
+function toggleAnswers(btn) {
+  const wrap = btn.nextElementSibling;
+  const isOpen = wrap.classList.contains('open');
+  wrap.classList.toggle('open', !isOpen);
+  const span = btn.querySelector('span');
+  span.textContent = isOpen ? '▼' : '▲';
+  btn.style.opacity = isOpen ? '1' : '0.85';
+}
+
+// ---- Toggle Vietnamese ----
+function toggleViet(btn) {
+  const viet = btn.nextElementSibling;
+  const shown = viet.classList.contains('show');
+  viet.classList.toggle('show', !shown);
+  btn.textContent = shown ? '🇻🇳 Tiếng Việt' : '🙈 Ẩn';
+}
+
+// ---- Global show all Q ----
+function showAllQ(partN) {
+  const grid = document.getElementById('grid' + partN);
+  grid.querySelectorAll('.q-item-text').forEach(t => {
+    t.classList.remove('hidden');
+    const btn = t.previousElementSibling;
+    if (btn && btn.classList.contains('show-q-btn')) btn.textContent = '🙈 Ẩn câu hỏi';
+  });
+}
+
+// ---- Global show all A ----
+function showAllA(partN) {
+  const grid = document.getElementById('grid' + partN);
+  grid.querySelectorAll('.answers-wrap').forEach(w => {
+    w.classList.add('open');
+    const btn = w.previousElementSibling;
+    if (btn) {
+      const span = btn.querySelector('span');
+      if (span) span.textContent = '▲';
+    }
+  });
+}
+
+// ---- Hide all ----
+function hideAll(partN) {
+  const grid = document.getElementById('grid' + partN);
+  grid.querySelectorAll('.q-item-text').forEach(t => {
+    t.classList.add('hidden');
+    const btn = t.previousElementSibling;
+    if (btn && btn.classList.contains('show-q-btn')) btn.textContent = '👁 Câu hỏi';
+  });
+  grid.querySelectorAll('.answers-wrap').forEach(w => {
+    w.classList.remove('open');
+    const btn = w.previousElementSibling;
+    if (btn) {
+      const span = btn.querySelector('span');
+      if (span) span.textContent = '▼';
+    }
+  });
+  grid.querySelectorAll('.viet-text').forEach(v => v.classList.remove('show'));
+}
+
+// ---- Audio ----
+let currentAudio = null;
+let currentBtn = null;
+
+function playAudio(src, btn) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentBtn) currentBtn.classList.remove('playing');
+    if (currentBtn === btn) { currentAudio = null; currentBtn = null; return; }
+  }
+  const audio = new Audio(src);
+  audio.addEventListener('ended', () => {
+    btn.classList.remove('playing');
+    btn.textContent = '🔊';
+    currentAudio = null; currentBtn = null;
+  });
+  audio.addEventListener('error', () => {
+    // Fallback: Web Speech API
+    btn.classList.remove('playing');
+    if ('speechSynthesis' in window) {
+      const text = getTextNear(btn);
+      if (text) {
+        const utter = new SpeechSynthesisUtterance(text);
+        utter.lang = 'en-US'; utter.rate = 0.9;
+        window.speechSynthesis.speak(utter);
+        btn.classList.add('playing');
+        utter.onend = () => { btn.classList.remove('playing'); btn.textContent = '🔊'; };
+      }
+    }
+  });
+  currentAudio = audio;
+  currentBtn = btn;
+  btn.classList.add('playing');
+  btn.textContent = '⏸';
+  audio.play();
+}
+
+function getTextNear(btn) {
+  // Try to find nearby text to speak
+  const parent = btn.closest('.q-item, .answer-item');
+  if (!parent) return null;
+  const textEl = parent.querySelector('.q-item-text, .answer-text');
+  return textEl ? textEl.innerText : null;
+}
+
+// ---- Image Modal ----
+function openModal(src, alt) {
+  const modal = document.getElementById('imgModal');
+  const img = document.getElementById('modalImg');
+  img.src = src; img.alt = alt || '';
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('imgModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+</script>
+</body>
+</html>
